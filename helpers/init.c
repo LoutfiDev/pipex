@@ -6,11 +6,26 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:43:24 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/13 15:42:26 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/14 10:25:21 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
+
+void	ft_free(char **array)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while (array[len])
+		len++;
+	while (i <= len)
+		free(array[i++]);
+	free(array);
+	return ;
+}
 
 char **init_cmd(int ac, char **av)
 {

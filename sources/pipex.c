@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:20:00 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/13 16:20:03 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/14 10:25:37 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@ int	main(int ac, char **av)
 	data = _init(ac, av);
 	if (!data)
 		return (ERROR);
+	ft_free(data->cmd);
+	free(data);
 	return (SUCCESS);
 }

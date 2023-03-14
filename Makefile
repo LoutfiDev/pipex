@@ -6,7 +6,7 @@
 #    By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 09:29:30 by yloutfi           #+#    #+#              #
-#    Updated: 2023/03/14 09:47:05 by yloutfi          ###   ########.fr        #
+#    Updated: 2023/03/14 10:01:33 by yloutfi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,17 +15,17 @@ CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 DFLAGS = -Llibft -lft
 CC = cc
 
-SRCS = ./sources/pipex.c ./helpers/parser.c ./helpers/init.c
+SRCS = ./sources/pipex.c
 
 SRCS_BONUS = ./bonus/pipex_bonus.c
 
-HELPERS = 
+HELPERS = ./helpers/parser.c ./helpers/init.c
 
-OBJS = pipex.o parser.o init.o
+OBJS = pipex.o
 
 OBJS_BONUS = pipex_bonus.o
 
-OBJS_HELPERS = 
+OBJS_HELPERS = parser.o init.o
 
 all: libft $(OBJS)
 
@@ -33,20 +33,20 @@ libft:
 	@$(MAKE) -C libft -s
 	
 $(OBJS): $(HELPERS) $(SRCS)
-	$(CC) $(CFLAGS) -c $(SRCS)
+	$(CC) $(CFLAGS) -c $(SRCS) $(HELPERS)
 	@rm -rf pipex_bonus.o
-	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) $(HELPERS) -o $(NAME)
+	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) $(OBJS_HELPERS) -o $(NAME)
 
-bonus: $(OBONUS)
+bonus: $(OBJS_BONUS)
 
 $(OBJS_BONUS) : $(HELPERS) $(SRCS_BONUS)
-	$(CC) $(CFLAGS) -c $(SRCS_BONUS)
+	$(CC) $(CFLAGS) -c $(SRCS_BONUS) $(HELPERS)
 	@rm -rf pipex.o
-	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS_BONUS) $(HELPERS) -o $(NAME)
+	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS_BONUS) $(OBJS_HELPERS) -o $(NAME)
 
 clean:
 	@$(MAKE) -C libft clean -s
-	-rm -f $(OBJS) $(OBJS_BONUS) $(HELPERS)
+	-rm -f $(OBJS) $(OBJS_BONUS) $(OBJS_HELPERS)
 
 fclean: clean
 	@$(MAKE) -C libft fclean -s

@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:12:22 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/13 15:11:52 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/14 10:24:27 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct s_data
 	int		nbr_cmd;
 	char	**cmd;
 }	t_data;
+
+//helpers functions
+void	ft_free(char **array);
 
 //parse functions
 void 	check_args(int ac, char **av, int bonus);

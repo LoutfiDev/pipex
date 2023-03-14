@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 08:44:42 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/13 16:22:45 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/14 10:23:46 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int iscmd_exist(char *cmd)
 		ft_putstr_fd("\n", 2);
 		exit_code = ERROR;
 	}
-	free(array);
+	ft_free(array);
 	free(path);
 	return (exit_code);
 }
