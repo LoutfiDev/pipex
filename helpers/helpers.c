@@ -1,30 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 11:20:00 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/15 09:27:26 by yloutfi          ###   ########.fr       */
+/*   Created: 2023/03/15 08:08:05 by yloutfi           #+#    #+#             */
+/*   Updated: 2023/03/15 08:08:39 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	main(int ac, char **av, char **env)
+void	ft_free(char **array)
 {
-	t_data	*data;
+	int	i;
+	int	len;
 
-	check_args(ac, av, env, MANDATORY);
-	data = _init(ac, av);
-	if (!data)
-		return (ERROR);
-	ft_free(data->cmd);
-	free(data);
-	return (SUCCESS);
+	i = 0;
+	len = 0;
+	while (array[len])
+		len++;
+	while (i <= len)
+		free(array[i++]);
+	free(array);
+	return ;
 }
-	// printf("%s\n", av[0]);
-	// av++;
-	// int i = execve(av[0], av, NULL);
-	// printf("%d\n", i);
+
+char	*get_path(char **env)
+{
+	char	*path;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], "PATH=", 5) == 0)
+			tmp = env[i];
+		i++;
+	}
+	path = ft_strchr(tmp, '=') + 1;
+	return (path);
+}

@@ -6,12 +6,12 @@
 #    By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 09:29:30 by yloutfi           #+#    #+#              #
-#    Updated: 2023/03/14 10:01:33 by yloutfi          ###   ########.fr        #
+#    Updated: 2023/03/15 08:09:34 by yloutfi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = #-Wall -Wextra -Werror #-fsanitize=address -g
 DFLAGS = -Llibft -lft
 CC = cc
 
@@ -19,13 +19,13 @@ SRCS = ./sources/pipex.c
 
 SRCS_BONUS = ./bonus/pipex_bonus.c
 
-HELPERS = ./helpers/parser.c ./helpers/init.c
+HELPERS = ./helpers/parser.c ./helpers/init.c ./helpers/helpers.c
 
 OBJS = pipex.o
 
 OBJS_BONUS = pipex_bonus.o
 
-OBJS_HELPERS = parser.o init.o
+OBJS_HELPERS = parser.o init.o helpers.o
 
 all: libft $(OBJS)
 
