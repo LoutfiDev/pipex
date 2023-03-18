@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 08:44:42 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/18 10:58:17 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/18 15:21:39 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	isfile_exist(char *filename)
 	return (SUCCESS);
 }
 
-int	check_path(char *cmd, char **env)
+char	*check_path(char *cmd, char **env)
 {
 	char	**array;
 	char	*path;
@@ -34,34 +34,39 @@ int	check_path(char *cmd, char **env)
 	int		i;
 
 	i = 0;
-	status = -1;
 	if (!cmd)
-		return (status);
+		return (NULL);
+	status = access(cmd, F_OK);
+	if(status != -1)
+		return(ft_strdup(cmd));
 	array = ft_split(get_path(env), ':');
 	while (array[i])
 	{
 		path = ft_strjoin(array[i++], "/", cmd);
 		status = access(path, F_OK);
-		free(path);
 		if (status != -1)
 		{
 			ft_free(array);
-			return (status);
+			return (path);
 		}
 	}
-	status = access(cmd, F_OK);
-	return (status);
+	return (NULL);
 }
 
 int	iscmd_exist(char *cmd, char **env)
 {
-	if (check_path(cmd, env) == -1)
+	char	*path;
+	
+	path = check_path(cmd, env);
+	if (!path)
 	{
 		ft_putstr_fd("Error: command not found: ", 2);
 		ft_putstr_fd(cmd, 2);
 		ft_putstr_fd("\n", 2);
+		free(path);
 		return (ERROR);
 	}
+	free(path);
 	return (SUCCESS);
 }
 

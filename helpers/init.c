@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:43:24 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/15 12:20:33 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/18 17:04:05 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ t_data	*_init(int ac, char **av)
 	data = ft_calloc(sizeof(t_data), 1);
 	if (!data)
 		return NULL;
-	data->infile = open(av[1], O_RDWR | O_TRUNC);
-	data->outfile = open(av[ac - 1], O_CREAT);
+	data->infile = open(av[1], O_RDONLY);
+	data->outfile = open(av[ac - 1], O_CREAT | O_WRONLY, 0644);
 	data->nbr_cmd = ac - 3;
 	data->cmd = init_cmd(ac, av);
 	if (!data->cmd)
