@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:12:22 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/15 08:08:59 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/18 11:09:39 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define ERROR 1
 # define MANDATORY 0
 # define BONUS 1
+# define READ_END 0
+# define WRITE_END 1
 
 //define structs
 typedef struct s_data
@@ -40,10 +42,12 @@ typedef struct s_data
 
 //helpers functions
 void	ft_free(char **array);
+void	ft_close(t_data *data);
 char	*get_path(char **env);
 
 //parse functions
 void	check_args(int ac, char **av, char **env, int bonus);
+int		check_path(char *cmd, char **env);
 
 //initialize functions 
 t_data	*_init(int ac, char **av);

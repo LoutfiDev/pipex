@@ -6,11 +6,18 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 08:08:05 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/15 08:08:39 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/18 11:09:27 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
+
+void	ft_close(t_data *data)
+{
+	close(data->infile);
+	close(data->outfile);
+	return ;
+}
 
 void	ft_free(char **array)
 {
@@ -40,6 +47,8 @@ char	*get_path(char **env)
 			tmp = env[i];
 		i++;
 	}
-	path = ft_strchr(tmp, '=') + 1;
-	return (path);
+	path = ft_strchr(tmp, '=');
+	if (!path)
+		return (NULL);
+	return (path + 1);
 }

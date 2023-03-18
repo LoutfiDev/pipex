@@ -6,12 +6,12 @@
 #    By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 09:29:30 by yloutfi           #+#    #+#              #
-#    Updated: 2023/03/15 08:09:34 by yloutfi          ###   ########.fr        #
+#    Updated: 2023/03/18 11:11:15 by yloutfi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
-CFLAGS = #-Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 DFLAGS = -Llibft -lft
 CC = cc
 
