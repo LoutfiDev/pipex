@@ -1,0 +1,13 @@
+Makefile
+bonus
+helpers
+helpers.o
+includes
+infile.txt
+init.o
+libft
+outfile.txt
+parser.o
+pipex
+pipex.o
+sources

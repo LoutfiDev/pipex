@@ -6,13 +6,13 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 08:44:42 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/18 15:21:39 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/20 16:07:51 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	isfile_exist(char *filename)
+int	isinfile_exist(char *filename)
 {
 	int	fd;
 
@@ -26,38 +26,25 @@ int	isfile_exist(char *filename)
 	return (SUCCESS);
 }
 
-char	*check_path(char *cmd, char **env)
+int	handle_outfile(char *filename)
 {
-	char	**array;
-	char	*path;
-	int		status;
-	int		i;
+	int	fd;
 
-	i = 0;
-	if (!cmd)
-		return (NULL);
-	status = access(cmd, F_OK);
-	if(status != -1)
-		return(ft_strdup(cmd));
-	array = ft_split(get_path(env), ':');
-	while (array[i])
+	fd = open(filename, O_CREAT, 0644);
+	if (fd == -1)
 	{
-		path = ft_strjoin(array[i++], "/", cmd);
-		status = access(path, F_OK);
-		if (status != -1)
-		{
-			ft_free(array);
-			return (path);
-		}
+		perror(filename);
+		return (ERROR);
 	}
-	return (NULL);
+	close(fd);
+	return (SUCCESS);
 }
 
 int	iscmd_exist(char *cmd, char **env)
 {
 	char	*path;
-	
-	path = check_path(cmd, env);
+
+	path = join_path(cmd, env);
 	if (!path)
 	{
 		ft_putstr_fd("Error: command not found: ", 2);
@@ -83,7 +70,7 @@ void	check_args(int ac, char **av, char **env, int bonus)
 		ft_putstr_fd("Error: invalid number of arguments\n", 2);
 		exit(ERROR);
 	}
-	if (isfile_exist(av[1]))
+	if (isinfile_exist(av[1]))
 		status = ERROR;
 	while (i < ac - 1)
 	{
@@ -92,8 +79,7 @@ void	check_args(int ac, char **av, char **env, int bonus)
 			status = ERROR;
 		ft_free(cmd);
 	}
-	i = open(av[ac - 1], O_CREAT);
-	close(i);
+	status = handle_outfile(av[ac - 1]);
 	if (status)
 		exit(ERROR);
 }

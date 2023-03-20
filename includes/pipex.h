@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:12:22 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/18 14:45:21 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/20 15:56:21 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*get_path(char **env);
 
 //parse functions
 void	check_args(int ac, char **av, char **env, int bonus);
-char	*check_path(char *cmd, char **env);
+char	*join_path(char *cmd, char **env);
 
 //initialize functions 
 t_data	*_init(int ac, char **av);
