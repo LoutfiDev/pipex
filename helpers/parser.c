@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 08:44:42 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/21 09:09:21 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/21 21:36:23 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,17 @@ void	check_args(int ac, char **av, char **env, int bonus)
 	}
 	if (isinfile_exist(av[1]))
 		status = ERROR;
+	status = handle_outfile(av[ac - 1]);
 	while (i < ac - 1)
 	{
 		cmd = ft_split(av[i++], ' ');
 		if (iscmd_exist(cmd[0], env))
 			status = ERROR;
-		ft_free(cmd);
+		ft_free_array(cmd);
 	}
-	status = handle_outfile(av[ac - 1]);
 	if (status)
+	{
+		while(1);
 		exit(ERROR);
+	}
 }

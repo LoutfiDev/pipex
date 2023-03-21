@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yloutfi <soulang.dev@gmail.com>            +#+  +:+       +#+        */
+/*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:15:11 by yloutfi           #+#    #+#             */
-/*   Updated: 2022/10/23 09:37:11 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/21 15:09:17 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*ft_fill_array(const char *str, char c, int *j)
 	return (ft_substr(str, start, length));
 }
 
-static char	**ft_free_tab(char **big_array)
+static char	**ft_free_array_tab(char **big_array)
 {
 	int	i;
 
@@ -80,7 +80,7 @@ char	**ft_split(char const *s, char c)
 			j++;
 		big_array[i++] = ft_fill_array(s, c, &j);
 		if (!big_array[i - 1])
-			return (ft_free_tab(big_array));
+			return (ft_free_array_tab(big_array));
 		j++;
 	}
 	return (big_array);

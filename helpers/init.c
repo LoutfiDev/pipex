@@ -6,13 +6,13 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:43:24 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/21 09:18:07 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/21 17:55:31 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-char	**init_cmd(int ac, char **av)
+char	**init_cmd(int nbr_cmd, char **av)
 {
 	char	**cmd;
 	int		i;
@@ -20,12 +20,42 @@ char	**init_cmd(int ac, char **av)
 
 	i = 2;
 	j = 0;
-	cmd = ft_calloc(ac - 2, sizeof(char *));
+	cmd = ft_calloc(nbr_cmd + 1, sizeof(char *));
 	if (!cmd)
 		return (NULL);
-	while (j < ac - 3)
-		cmd[j++] = ft_strdup(av[i++]);
+	while (j < nbr_cmd)
+	{
+		cmd[j] = ft_strdup(av[i++]);
+		if (!cmd[j])
+		{
+			free(cmd);
+			return (NULL);
+		}
+		j++;
+	}
 	return (cmd);
+}
+
+int	**_init_pipe(int nbr)
+{
+	int	**p;
+	int	i;
+
+	i = 0;
+	p = ft_calloc(sizeof(int *), nbr);
+	if (!p)
+		return (NULL);
+	while (i < nbr)
+	{
+		p[i] = ft_calloc(sizeof(int), 2);
+		if (!p[i])
+		{
+			free(p);
+			return (NULL);
+		}
+		i++;
+	}
+	return (p);
 }
 
 t_data	*_init(int ac, char **av)
@@ -44,8 +74,12 @@ t_data	*_init(int ac, char **av)
 		ft_putstr_fd("\n", 2);
 	}
 	data->nbr_cmd = ac - 3;
-	data->cmd = init_cmd(ac, av);
+	data->cmd = init_cmd(data->nbr_cmd, av);
 	if (!data->cmd)
+		return (NULL);
+	data->nbr_pipes = ac - 4;
+	data->pipes = _init_pipe(data->nbr_pipes);
+	if (!data->pipes)
 		return (NULL);
 	return (data);
 }
