@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 08:08:05 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/20 15:55:48 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/21 09:32:18 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char	*join_path(char *cmd, char **env)
 			ft_free(array);
 			return (path);
 		}
+		free(path);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:43:24 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/20 16:00:32 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/21 09:18:07 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ t_data	*_init(int ac, char **av)
 		return (NULL);
 	data->infile = open(av[1], O_RDONLY);
 	data->outfile = open(av[ac - 1], O_WRONLY | O_TRUNC);
+	if (data->outfile == -1)
+	{
+		ft_putstr_fd("Error: permission denied: ", 2);
+		ft_putstr_fd(av[ac - 1], 2);
+		ft_putstr_fd("\n", 2);
+	}
 	data->nbr_cmd = ac - 3;
 	data->cmd = init_cmd(ac, av);
 	if (!data->cmd)

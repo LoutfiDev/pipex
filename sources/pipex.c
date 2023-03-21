@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:20:00 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/20 15:56:21 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/21 09:33:32 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	main(int ac, char **av, char **env)
 	_fork2(data, p, env);
 	close(p[READ_END]);
 	close(p[WRITE_END]);
-	while (wait(NULL) > 0)
+	while (wait(NULL) != -1)
 		;
 	ft_free(data->cmd);
 	ft_close(data);

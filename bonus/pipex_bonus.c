@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 12:14:54 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/11 12:14:55 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/21 09:32:10 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ int	main(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
-	return	(0);
+	return (0);
 }

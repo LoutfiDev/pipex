@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 08:44:42 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/20 16:07:51 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/21 09:09:21 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,18 @@ int	isinfile_exist(char *filename)
 	int	fd;
 
 	fd = open(filename, O_RDONLY);
-	if (fd == -1)
+	if (fd == -1 && !access(filename, F_OK))
 	{
-		ft_putstr_fd("Error: No such file or directory\n", 2);
+		ft_putstr_fd("Error: permission denied: ", 2);
+		ft_putstr_fd(filename, 2);
+		ft_putstr_fd("\n", 2);
+		return (ERROR);
+	}
+	else if (fd == -1)
+	{
+		ft_putstr_fd("Error: No such file or directory: ", 2);
+		ft_putstr_fd(filename, 2);
+		ft_putstr_fd("\n", 2);
 		return (ERROR);
 	}
 	close(fd);
