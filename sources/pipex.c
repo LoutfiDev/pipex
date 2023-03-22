@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:20:00 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/22 09:29:44 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/22 09:45:34 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	_fork1(t_data *data, char **env)
 	{
 		if (dup2(data->infile, STDIN_FILENO) == -1)
 			exit (ERROR);
-		if (dup2(data->pipes[0][WRITE_END], STDOUT_FILENO) == -1)
+		if (dup2(data->pipe[0][WRITE_END], STDOUT_FILENO) == -1)
 			exit (ERROR);
-		close(data->pipes[0][READ_END]);
-		close(data->pipes[0][WRITE_END]);
+		close(data->pipe[0][READ_END]);
+		close(data->pipe[0][WRITE_END]);
 		array = ft_split(data->cmd[0], ' ');
 		cmd = join_path(array[0], env);
 		execve(cmd, &array[0], env);
@@ -47,12 +47,12 @@ void	_fork2(t_data *data, char **env)
 		exit (ERROR);
 	else if (id_grep == 0)
 	{
-		if (dup2(data->pipes[0][READ_END], STDIN_FILENO) == -1)
+		if (dup2(data->pipe[0][READ_END], STDIN_FILENO) == -1)
 			exit(ERROR);
 		if (dup2(data->outfile, STDOUT_FILENO) == -1)
 			exit(ERROR);
-		close(data->pipes[0][READ_END]);
-		close(data->pipes[0][WRITE_END]);
+		close(data->pipe[0][READ_END]);
+		close(data->pipe[0][WRITE_END]);
 		array = ft_split(data->cmd[1], ' ');
 		cmd = join_path(array[0], env);
 		execve(cmd, &array[0], env);
@@ -68,7 +68,7 @@ int	main(int ac, char **av, char **env)
 	data = _init(ac, av);
 	if (!data)
 		return (ERROR);
-	if (pipe(data->pipes[0]))
+	if (pipe(data->pipe[0]))
 		return (ERROR);
 	_fork1(data, env);
 	_fork2(data, env);

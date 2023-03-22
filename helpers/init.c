@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:43:24 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/21 17:55:31 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/22 09:45:34 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ t_data	*_init(int ac, char **av)
 	data->cmd = init_cmd(data->nbr_cmd, av);
 	if (!data->cmd)
 		return (NULL);
-	data->nbr_pipes = ac - 4;
-	data->pipes = _init_pipe(data->nbr_pipes);
-	if (!data->pipes)
+	data->nbr_pipe = ac - 4;
+	data->pipe = _init_pipe(data->nbr_pipe);
+	if (!data->pipe)
 		return (NULL);
 	return (data);
 }

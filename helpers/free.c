@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 09:36:03 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/22 09:36:46 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/22 09:45:34 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	ft_close(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < data->nbr_pipes)
+	while (i < data->nbr_pipe)
 	{
-		close(data->pipes[i][READ_END]);
-		close(data->pipes[i][WRITE_END]);
+		close(data->pipe[i][READ_END]);
+		close(data->pipe[i][WRITE_END]);
 		i++;
 	}
 	close(data->infile);
@@ -43,21 +43,21 @@ void	ft_free_array(char **array)
 	return ;
 }
 
-void	ft_free_pipes(int **pipes, int nbr_pipes)
+void	ft_free_pipe(int **pipe, int nbr_pipe)
 {
 	int	i;
 
 	i = 0;
-	while (i < nbr_pipes)
-		free(pipes[i++]);
-	free(pipes);
+	while (i < nbr_pipe)
+		free(pipe[i++]);
+	free(pipe);
 	return ;
 }
 
 void	ft_free(t_data	*data)
 {
 	ft_close(data);
-	ft_free_pipes(data->pipes, data->nbr_pipes);
+	ft_free_pipe(data->pipe, data->nbr_pipe);
 	ft_free_array(data->cmd);
 	free(data);
 	return ;

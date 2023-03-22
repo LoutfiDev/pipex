@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:12:22 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/21 21:21:48 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/22 15:51:21 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,25 @@ typedef struct s_data
 	int		outfile;
 	int		nbr_cmd;
 	char	**cmd;
-	int		nbr_pipes;
-	int		**pipes;
+	int		nbr_pipe;
+	int		**pipe;
 }	t_data;
 
 //helpers functions
-void	ft_free(t_data	*data);
-void	ft_free_array(char **array);
 char	*get_path(char **env);
 char	*join_path(char *cmd, char **env);
+void	_fork(t_data *data, int i, int j, char **env);
 
 //parse functions
 void	check_args(int ac, char **av, char **env, int bonus);
+
+//get_next_line function
+char	*get_next_line(int fd);
+
+//free functions 
+void	ft_free(t_data	*data);
+void	ft_close(t_data *data);
+void	ft_free_array(char **array);
 
 //initialize functions 
 t_data	*_init(int ac, char **av);

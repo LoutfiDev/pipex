@@ -6,7 +6,7 @@
 #    By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 09:29:30 by yloutfi           #+#    #+#              #
-#    Updated: 2023/03/22 09:38:07 by yloutfi          ###   ########.fr        #
+#    Updated: 2023/03/22 16:05:31 by yloutfi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,16 +17,17 @@ CC = cc
 
 SRCS = ./sources/pipex.c
 
-SRCS_BONUS = ./bonus/pipex_bonus.c
+SRCS_BONUS = ./bonus/pipex_bonus.c ./get_next_line/get_next_line.c	\
+	./get_next_line/get_next_line_utils.c
 
-HELPERS = ./helpers/parser.c ./helpers/init.c ./helpers/helpers.c \
+HELPERS = ./helpers/parser.c ./helpers/init.c ./helpers/helpers.c 	\
 	./helpers/free.c
 
 OBJS = pipex.o
 
-OBJS_BONUS = pipex_bonus.o
+OBJS_BONUS = pipex_bonus.o get_next_line.o get_next_line_utils.o
 
-OBJS_HELPERS = parser.o init.o helpers.o free.o
+OBJS_HELPERS = init.o helpers.o free.o parser.o
 
 all: libft $(OBJS)
 
@@ -38,7 +39,7 @@ $(OBJS): $(HELPERS) $(SRCS)
 	@rm -rf pipex_bonus.o
 	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) $(OBJS_HELPERS) -o $(NAME)
 
-bonus: $(OBJS_BONUS)
+bonus: libft $(OBJS_BONUS)
 
 $(OBJS_BONUS) : $(HELPERS) $(SRCS_BONUS)
 	$(CC) $(CFLAGS) -c $(SRCS_BONUS) $(HELPERS)
