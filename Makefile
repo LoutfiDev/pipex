@@ -6,7 +6,7 @@
 #    By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 09:29:30 by yloutfi           #+#    #+#              #
-#    Updated: 2023/03/20 14:57:48 by yloutfi          ###   ########.fr        #
+#    Updated: 2023/03/22 09:38:07 by yloutfi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,14 @@ SRCS = ./sources/pipex.c
 
 SRCS_BONUS = ./bonus/pipex_bonus.c
 
-HELPERS = ./helpers/parser.c ./helpers/init.c ./helpers/helpers.c
+HELPERS = ./helpers/parser.c ./helpers/init.c ./helpers/helpers.c \
+	./helpers/free.c
 
 OBJS = pipex.o
 
 OBJS_BONUS = pipex_bonus.o
 
-OBJS_HELPERS = parser.o init.o helpers.o
+OBJS_HELPERS = parser.o init.o helpers.o free.o
 
 all: libft $(OBJS)
 

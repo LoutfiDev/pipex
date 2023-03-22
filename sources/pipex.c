@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:20:00 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/21 21:21:28 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/22 09:29:44 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,5 @@ int	main(int ac, char **av, char **env)
 	ft_free(data);
 	while (wait(NULL) != -1)
 		;
-	while(1);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 08:44:42 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/21 21:36:23 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/22 09:29:30 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,5 @@ void	check_args(int ac, char **av, char **env, int bonus)
 		ft_free_array(cmd);
 	}
 	if (status)
-	{
-		while(1);
 		exit(ERROR);
-	}
 }
