@@ -6,13 +6,13 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 09:27:56 by yloutfi           #+#    #+#             */
-/*   Updated: 2022/11/12 12:47:26 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/29 01:45:40 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
-int	ft_strlen(char *str)
+int	gnl_strlen(char *str)
 {
 	int	len;
 
@@ -24,7 +24,7 @@ int	ft_strlen(char *str)
 	return (len);
 }
 
-int	ft_memchr(char *str, int c, int n)
+int	gnl_memchr(char *str, int c, int n)
 {
 	int	i;
 
@@ -40,14 +40,14 @@ int	ft_memchr(char *str, int c, int n)
 	return (0);
 }
 
-char	*ft_strdup(char *s1)
+char	*gnl_strdup(char *s1)
 {
 	char	*ptr;
 	int		i;
 
 	if (!s1)
 		return (NULL);
-	ptr = (char *)malloc(ft_strlen(s1) + 1);
+	ptr = (char *)malloc(gnl_strlen(s1) + 1);
 	if (ptr == NULL)
 		return (NULL);
 	i = 0;
@@ -60,16 +60,16 @@ char	*ft_strdup(char *s1)
 	return (ptr);
 }
 
-char	*ft_substr(char *str, int start, int len)
+char	*gnl_substr(char *str, int start, int len)
 {
 	char	*substr;
 	int		i;
 
 	if (!str)
 		return (0);
-	if (start + len > ft_strlen(str))
-		len = ft_strlen(str) - start;
-	if (start >= ft_strlen(str))
+	if (start + len > gnl_strlen(str))
+		len = gnl_strlen(str) - start;
+	if (start >= gnl_strlen(str))
 		return (NULL);
 	i = 0;
 	substr = malloc((len + 1) * sizeof(char));
@@ -84,7 +84,7 @@ char	*ft_substr(char *str, int start, int len)
 	return (substr);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		len;
@@ -92,19 +92,19 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*res;
 
 	if (!s1 || !s1[0])
-		return (ft_strdup(s2));
+		return (gnl_strdup(s2));
 	if (!s2 || !s2[0])
 		return (NULL);
-	lenght = ft_strlen(s1) + ft_strlen(s2);
+	lenght = gnl_strlen(s1) + gnl_strlen(s2);
 	res = malloc((lenght + 1) * sizeof(char));
 	if (res == NULL)
 		return (0);
 	lenght = 0;
 	i = 0;
-	len = ft_strlen(s1);
+	len = gnl_strlen(s1);
 	while (s1[i] && i < len)
 		res[lenght++] = s1[i++];
-	len = ft_strlen(s2);
+	len = gnl_strlen(s2);
 	i = 0;
 	while (s2[i] && i < len)
 		res[lenght++] = s2[i++];

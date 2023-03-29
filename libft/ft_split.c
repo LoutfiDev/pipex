@@ -6,11 +6,11 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:15:11 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/21 15:09:17 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/29 01:44:37 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 static int	ft_nbr_array(const char *str, char c)
 {

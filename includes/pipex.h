@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:12:22 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/22 15:51:21 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/29 01:46:44 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <sys/wait.h>
-# include "../libft/libft.h"
+# include "../includes/libft.h"
+# include "../includes/get_next_line.h"
 
 //fotr test only
 # include <stdio.h>
