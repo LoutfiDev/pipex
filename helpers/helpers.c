@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 08:08:05 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/22 13:43:23 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/04/01 02:42:12 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	_fork(t_data *data, int i, int j, char **env)
 			exit (ERROR);
 		ft_close(data);
 		array = ft_split(data->cmd[i], ' ');
-		cmd = join_path(array[0], env);
+		if (array[0][0] != '/')
+			cmd = join_path(array[0], env);
+		else
+			cmd = ft_strdup(array[0]);
 		execve(cmd, &array[0], env);
 		exit (ERROR);
 	}
@@ -64,9 +67,6 @@ char	*join_path(char *cmd, char **env)
 	i = 0;
 	if (!cmd)
 		return (NULL);
-	status = access(cmd, F_OK);
-	if (status != -1)
-		return (ft_strdup(cmd));
 	array = ft_split(get_path(env), ':');
 	while (array[i])
 	{

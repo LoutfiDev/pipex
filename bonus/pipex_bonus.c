@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 12:14:54 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/22 13:44:20 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/04/01 02:45:12 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	first_fork(t_data *data, char **env)
 			exit (ERROR);
 		ft_close(data);
 		array = ft_split(data->cmd[0], ' ');
-		cmd = join_path(array[0], env);
+		if (array[0][0] != '/')
+			cmd = join_path(array[0], env);
+		else
+			cmd = ft_strdup(array[0]);
 		execve(cmd, &array[0], env);
 		exit (ERROR);
 	}
@@ -63,7 +66,10 @@ void	last_fork(t_data *data, char **env)
 			exit(ERROR);
 		ft_close(data);
 		array = ft_split(data->cmd[data->nbr_cmd - 1], ' ');
-		cmd = join_path(array[0], env);
+		if (array[0][0] != '/')
+			cmd = join_path(array[0], env);
+		else
+			cmd = ft_strdup(array[0]);
 		execve(cmd, &array[0], env);
 		exit (ERROR);
 	}
@@ -72,18 +78,16 @@ void	last_fork(t_data *data, char **env)
 int	main(int ac, char **av, char **env)
 {
 	t_data	*data;
-	int		i;
 
-	check_args(ac, av, env, BONUS);
-	data = _init(ac, av);
+	if (check_heredoc(ac, av, env))
+	{
+		check_args(ac, av, env, BONUS);
+		data = _init(ac, av);
+	}
+	else
+		data = _init_heredoc(ac, av);
 	if (!data)
 		return (ERROR);
-	i = 0;
-	while (i < data->nbr_pipe)
-	{
-		if (pipe(data->pipe[i++]))
-			return (ERROR);
-	}
 	first_fork(data, env);
 	middle_forks(data, env);
 	last_fork(data, env);

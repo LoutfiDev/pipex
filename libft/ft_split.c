@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:15:11 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/29 01:44:37 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/04/01 01:15:25 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,16 @@ static char	**ft_free_array_tab(char **big_array)
 	return (NULL);
 }
 
+int	check_space(char const *s, char **big_array)
+{
+	if (s[0] == ' ' || s[ft_strlen(s) - 1] == ' ')
+	{
+		big_array[0] = ft_strdup(s);
+		return (1);
+	}
+	return (0);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**big_array;
@@ -74,6 +84,8 @@ char	**ft_split(char const *s, char c)
 	big_array = ft_calloc((nbr + 1), sizeof(char *));
 	if (big_array == NULL)
 		return (0);
+	if (check_space(s, big_array))
+		return (big_array);
 	while (s && i < nbr)
 	{
 		while (s[j] && s[j] == c)

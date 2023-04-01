@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:43:24 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/22 09:45:34 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/04/01 02:14:06 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ int	**_init_pipe(int nbr)
 			free(p);
 			return (NULL);
 		}
+		if (pipe(p[i]))
+		{
+			free(p);
+			return (NULL);
+		}
 		i++;
 	}
 	return (p);
@@ -81,5 +86,51 @@ t_data	*_init(int ac, char **av)
 	data->pipe = _init_pipe(data->nbr_pipe);
 	if (!data->pipe)
 		return (NULL);
+	return (data);
+}
+
+void	heredoc(int fd, char *limiter)
+{
+	char	*list;
+
+	while (1)
+	{
+		write(STDIN_FILENO, "heredoc>", ft_strlen("heredoc>"));
+		list = get_next_line(STDIN_FILENO);
+		if (!list || (ft_strncmp(list, limiter, ft_strlen(list) - 1) == 0
+				&& ft_strlen(list) > 1))
+			break ;
+		ft_putstr_fd(list, fd);
+		free(list);
+	}
+	free(list);
+	close(fd);
+	return ;
+}
+
+t_data	*_init_heredoc(int ac, char **av)
+{
+	t_data	*data;
+
+	data = ft_calloc(sizeof(t_data), 1);
+	if (!data)
+		return (NULL);
+	data->outfile = open(av[ac - 1], O_WRONLY | O_APPEND);
+	if (data->outfile == -1)
+	{
+		ft_putstr_fd("Error: permission denied: ", 2);
+		ft_putstr_fd(av[ac - 1], 2);
+		ft_putstr_fd("\n", 2);
+	}
+	data->nbr_pipe = ac - 5;
+	data->nbr_cmd = ac - 4;
+	data->cmd = init_cmd(data->nbr_cmd, av + 1);
+	if (!data->cmd)
+		return (NULL);
+	data->pipe = _init_pipe(data->nbr_pipe);
+	if (!data->pipe)
+		return (NULL);
+	data->infile = data->pipe[0][WRITE_END];
+	heredoc(data->infile, av[2]);
 	return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:20:00 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/22 09:45:34 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/04/01 02:45:18 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	_fork1(t_data *data, char **env)
 		close(data->pipe[0][READ_END]);
 		close(data->pipe[0][WRITE_END]);
 		array = ft_split(data->cmd[0], ' ');
-		cmd = join_path(array[0], env);
+		if (array[0][0] != '/')
+			cmd = join_path(array[0], env);
+		else
+			cmd = ft_strdup(array[0]);
 		execve(cmd, &array[0], env);
 		exit (ERROR);
 	}
@@ -54,7 +57,10 @@ void	_fork2(t_data *data, char **env)
 		close(data->pipe[0][READ_END]);
 		close(data->pipe[0][WRITE_END]);
 		array = ft_split(data->cmd[1], ' ');
-		cmd = join_path(array[0], env);
+		if (array[0][0] != '/')
+			cmd = join_path(array[0], env);
+		else
+			cmd = ft_strdup(array[0]);
 		execve(cmd, &array[0], env);
 		exit (ERROR);
 	}
@@ -67,8 +73,6 @@ int	main(int ac, char **av, char **env)
 	check_args(ac, av, env, MANDATORY);
 	data = _init(ac, av);
 	if (!data)
-		return (ERROR);
-	if (pipe(data->pipe[0]))
 		return (ERROR);
 	_fork1(data, env);
 	_fork2(data, env);

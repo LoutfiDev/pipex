@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:12:22 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/29 01:46:44 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/03/30 15:57:03 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ void	_fork(t_data *data, int i, int j, char **env);
 
 //parse functions
 void	check_args(int ac, char **av, char **env, int bonus);
-
-//get_next_line function
-char	*get_next_line(int fd);
+int		check_heredoc(int ac, char **av, char **env);
 
 //free functions 
 void	ft_free(t_data	*data);
@@ -61,5 +59,6 @@ void	ft_free_array(char **array);
 
 //initialize functions 
 t_data	*_init(int ac, char **av);
+t_data	*_init_heredoc(int ac, char **av);
 
 #endif
