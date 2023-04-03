@@ -6,11 +6,30 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 09:36:03 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/04/01 01:27:58 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/04/03 01:55:53 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
+
+int	is_empty(int ac, char **av, int heredoc)
+{
+	int	i;
+
+	i = 1;
+	while (i < ac)
+	{
+		if (i == 2 && heredoc)
+			i++;
+		else
+		{
+			if (!av[i] || av[i][0] == '\0')
+				return (ERROR);
+			i++;
+		}
+	}
+	return (SUCCESS);
+}
 
 void	ft_close(t_data *data)
 {

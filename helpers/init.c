@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:43:24 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/04/01 02:14:06 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/04/03 15:17:06 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,22 @@ t_data	*_init(int ac, char **av)
 void	heredoc(int fd, char *limiter)
 {
 	char	*list;
+	char	*tmp;
+	char	*temp;
 
+	temp = ft_strdup(limiter);
+	tmp = gnl_strjoin(temp, "\n");
 	while (1)
 	{
 		write(STDIN_FILENO, "heredoc>", ft_strlen("heredoc>"));
 		list = get_next_line(STDIN_FILENO);
-		if (!list || (ft_strncmp(list, limiter, ft_strlen(list) - 1) == 0
-				&& ft_strlen(list) > 1))
+		if (!list || ft_strcmp(list, tmp) == 0)
 			break ;
 		ft_putstr_fd(list, fd);
 		free(list);
 	}
 	free(list);
+	free(tmp);
 	close(fd);
 	return ;
 }

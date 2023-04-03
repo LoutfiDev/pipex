@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 08:08:05 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/04/01 02:42:12 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/04/03 02:47:10 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,58 @@ void	_fork(t_data *data, int i, int j, char **env)
 		execve(cmd, &array[0], env);
 		exit (ERROR);
 	}
+}
+
+void	tmp_heredoc(char *limiter, int *heredoc)
+{
+	char	*list;
+	char	*tmp;
+	char	*temp;
+
+	if (*heredoc > 0)
+		return ;
+	temp = ft_strdup(limiter);
+	tmp = gnl_strjoin(temp, "\n");
+	while (1)
+	{
+		write(STDIN_FILENO, "heredoc>", ft_strlen("heredoc>"));
+		list = get_next_line(STDIN_FILENO);
+		if (!list || ft_strcmp(list, tmp) == 0)
+			break ;
+		free(list);
+	}
+	*heredoc += 1;
+	free(list);
+	free(tmp);
+	return ;
+}
+
+int	iscmd_exist_herdoc(char *cmd, char **env, char *limiter, int *heredoc)
+{
+	char	*path;
+	int		status;
+
+	if (!(cmd[0] >= 'A' && cmd[0] <= 'Z') && !(cmd[0] >= 'a' && cmd[0] <= 'z'))
+	{
+		status = access(cmd, F_OK);
+		if (status == -1)
+			path = NULL;
+		else
+			path = ft_strdup(cmd);
+	}
+	else
+		path = join_path(cmd, env);
+	if (!path)
+	{
+		tmp_heredoc(limiter, heredoc);
+		ft_putstr_fd("Error: command not found: ", 2);
+		ft_putstr_fd(cmd, 2);
+		ft_putstr_fd("\n", 2);
+		free(path);
+		return (ERROR);
+	}
+	free(path);
+	return (SUCCESS);
 }
 
 char	*join_path(char *cmd, char **env)

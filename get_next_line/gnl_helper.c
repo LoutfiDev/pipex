@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   gnl_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/09 16:35:58 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/04/03 02:39:28 by yloutfi          ###   ########.fr       */
+/*   Created: 2023/04/03 02:41:53 by yloutfi           #+#    #+#             */
+/*   Updated: 2023/04/03 02:44:40 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "../includes/libft.h"
+#include "../includes/get_next_line.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strcpy(char *dest, char *src)
 {
-	char	*ptr;
-	int		i;
+	int	i;
 
 	i = 0;
-	ptr = (char *)malloc(ft_strlen(s1) + 1);
-	if (ptr == NULL || !s1)
-		return (ptr);
-	while (s1[i])
+	while (src[i])
 	{
-		ptr[i] = s1[i];
+		dest[i] = src[i];
 		i++;
 	}
-	ptr[i] = 0;
-	return (ptr);
+	dest[i] = '\0';
+	return (dest);
 }

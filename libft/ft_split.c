@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:15:11 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/04/01 01:15:25 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/04/02 18:12:03 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,20 @@ static char	**ft_free_array_tab(char **big_array)
 	return (NULL);
 }
 
-int	check_space(char const *s, char **big_array)
+char	**check_space(char const *s)
 {
+	char	**big_array;
+
+	big_array = ft_calloc((2), sizeof(char *));
+	if (big_array == NULL)
+		return (0);
 	if (s[0] == ' ' || s[ft_strlen(s) - 1] == ' ')
 	{
 		big_array[0] = ft_strdup(s);
-		return (1);
+		return (big_array);
 	}
-	return (0);
+	free(big_array);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
@@ -80,12 +86,13 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	j = 0;
+	big_array = check_space(s);
+	if (big_array)
+		return (big_array);
 	nbr = ft_nbr_array(s, c);
 	big_array = ft_calloc((nbr + 1), sizeof(char *));
 	if (big_array == NULL)
 		return (0);
-	if (check_space(s, big_array))
-		return (big_array);
 	while (s && i < nbr)
 	{
 		while (s[j] && s[j] == c)

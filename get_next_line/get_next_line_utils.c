@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 09:27:56 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/29 01:45:40 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/04/03 02:46:39 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,29 +86,22 @@ char	*gnl_substr(char *str, int start, int len)
 
 char	*gnl_strjoin(char *s1, char *s2)
 {
+	char	*final_str;
+	int		total_len;
 	int		i;
-	int		len;
-	int		lenght;
-	char	*res;
 
-	if (!s1 || !s1[0])
-		return (gnl_strdup(s2));
-	if (!s2 || !s2[0])
-		return (NULL);
-	lenght = gnl_strlen(s1) + gnl_strlen(s2);
-	res = malloc((lenght + 1) * sizeof(char));
-	if (res == NULL)
+	i = 0;
+	total_len = gnl_strlen(s1) + gnl_strlen(s2);
+	final_str = malloc(sizeof(char) * (total_len + 1));
+	if (!final_str)
 		return (0);
-	lenght = 0;
-	i = 0;
-	len = gnl_strlen(s1);
-	while (s1[i] && i < len)
-		res[lenght++] = s1[i++];
-	len = gnl_strlen(s2);
-	i = 0;
-	while (s2[i] && i < len)
-		res[lenght++] = s2[i++];
-	res[lenght] = '\0';
+	if (!s1)
+		s1 = gnl_strdup("");
+	if (s1)
+		ft_strcpy(final_str, s1);
+	i = gnl_strlen(final_str);
+	if (s2)
+		ft_strcpy(final_str + i, s2);
 	free(s1);
-	return (res);
+	return (final_str);
 }

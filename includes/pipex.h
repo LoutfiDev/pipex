@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:12:22 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/03/30 15:57:03 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/04/02 18:34:53 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ typedef struct s_data
 char	*get_path(char **env);
 char	*join_path(char *cmd, char **env);
 void	_fork(t_data *data, int i, int j, char **env);
+void	tmp_heredoc(char *limiter, int *heredoc);
+int		iscmd_exist_herdoc(char *cmd, char **env, char *limiter, int *heredoc);
+int		is_empty(int ac, char **av, int heredoc);
 
 //parse functions
 void	check_args(int ac, char **av, char **env, int bonus);

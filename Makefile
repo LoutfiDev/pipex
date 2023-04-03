@@ -6,12 +6,12 @@
 #    By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 09:29:30 by yloutfi           #+#    #+#              #
-#    Updated: 2023/03/30 16:00:03 by yloutfi          ###   ########.fr        #
+#    Updated: 2023/04/03 02:43:27 by yloutfi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 DFLAGS = -Llibft -lft
 CC = cc
 
@@ -21,14 +21,14 @@ SRCS_BONUS = ./bonus/pipex_bonus.c
 
 HELPERS = ./helpers/parser.c ./helpers/init.c ./helpers/helpers.c			\
 	./get_next_line/get_next_line.c	./get_next_line/get_next_line_utils.c 	\
-	./helpers/free.c
+	./helpers/free.c ./get_next_line/gnl_helper.c
 
 OBJS = pipex.o
 
 OBJS_BONUS = pipex_bonus.o
 
 OBJS_HELPERS = init.o helpers.o free.o parser.o get_next_line_utils.o		\
-	get_next_line.o
+	get_next_line.o gnl_helper.o
 
 all: libft $(OBJS)
 

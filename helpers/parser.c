@@ -6,7 +6,7 @@
 /*   By: yloutfi <yloutfi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 08:44:42 by yloutfi           #+#    #+#             */
-/*   Updated: 2023/04/01 02:24:41 by yloutfi          ###   ########.fr       */
+/*   Updated: 2023/04/03 15:35:40 by yloutfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	isinfile_exist(char *filename)
 	return (SUCCESS);
 }
 
-int	handle_outfile(char *filename)
+void	handle_outfile(char *filename)
 {
 	int	fd;
 
@@ -43,10 +43,10 @@ int	handle_outfile(char *filename)
 	if (fd == -1)
 	{
 		perror(filename);
-		return (ERROR);
+		exit(ERROR);
 	}
 	close(fd);
-	return (SUCCESS);
+	return ;
 }
 
 int	iscmd_exist(char *cmd, char **env)
@@ -54,7 +54,7 @@ int	iscmd_exist(char *cmd, char **env)
 	char	*path;
 	int		status;
 
-	if (!(cmd[0] >= 'A' && cmd[0] > 'Z') || !(cmd[0] >= 'a' && cmd[0] <= 'z'))
+	if (!(cmd[0] >= 'A' && cmd[0] <= 'Z') && !(cmd[0] >= 'a' && cmd[0] <= 'z'))
 	{
 		status = access(cmd, F_OK);
 		if (status == -1)
@@ -89,9 +89,10 @@ void	check_args(int ac, char **av, char **env, int bonus)
 		ft_putstr_fd("Error: invalid number of arguments\n", 2);
 		exit(ERROR);
 	}
+	if (is_empty(ac, av, 0))
+		exit(ERROR);
 	if (isinfile_exist(av[1]))
 		status = ERROR;
-	status = handle_outfile(av[ac - 1]);
 	while (i < ac - 1)
 	{
 		cmd = ft_split(av[i++], ' ');
@@ -99,8 +100,7 @@ void	check_args(int ac, char **av, char **env, int bonus)
 			status = ERROR;
 		ft_free_array(cmd);
 	}
-	if (status)
-		exit(ERROR);
+	handle_outfile(av[ac - 1]);
 }
 
 int	check_heredoc(int ac, char **av, char **env)
@@ -108,21 +108,25 @@ int	check_heredoc(int ac, char **av, char **env)
 	char	**cmd;
 	int		status;
 	int		i;
+	int		heredoc;
 
 	status = SUCCESS;
+	heredoc = 0;
 	i = 3;
 	if (ac < 6)
 		return (ERROR);
-	if (ft_strncmp(av[1], "here_doc", ft_strlen(av[1])))
+	if (is_empty(ac, av, 1))
+		exit(ERROR);
+	if (ft_strcmp(av[1], "here_doc"))
 		return (ERROR);
-	status = handle_outfile(av[ac - 1]);
 	while (i < ac - 1)
 	{
 		cmd = ft_split(av[i++], ' ');
-		if (iscmd_exist(cmd[0], env))
+		if (iscmd_exist_herdoc(cmd[0], env, av[2], &heredoc))
 			status = ERROR;
 		ft_free_array(cmd);
 	}
+	handle_outfile(av[ac - 1]);
 	if (status)
 		exit(ERROR);
 	return (SUCCESS);
